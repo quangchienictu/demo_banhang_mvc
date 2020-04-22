@@ -89,7 +89,7 @@
                     </div>
                     <div class="form-group">
                         <label>Giảm giá :</label>    
-                        <input type="number" class="form-control" name="dismount"  required="" min="1">
+                        <input type="number" class="form-control" name="dismount"  required="" min="1" value="0">
                     </div>
                     <div class="form-group">
                         <label>Ảnh đại diện :</label>    
@@ -144,17 +144,8 @@
                 <div class="col-md-12" >
                     <label for="usr">Mã sản phẩm :<b id="masp"></b></label>
                     <div class="form-group">
-                        <label for="sel1">Thời trang :</label>
-                        <select class="form-control" id="thoitrang" required="">
-                           <option value="dafault" selected disabled hidden>-- Lựa chọn --</option>
-                            <option value="1">Thời trang nam</option>
-                            <option value="2">Thời trang nữ</option>
-                            <option value="3">Phụ kiện</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                     <label for="sel1">Danh mục:</label>
-                      <select class="form-control" id="dm" name="catalog_id">
+                      <select class="form-control" id="dm2" name="catalog_id">
                             
                     </select>
                 </div>   
@@ -168,31 +159,31 @@
                     </div>
                     <div class="form-group">
                         <label>Giảm giá :</label>    
-                        <input id="update_dismount" type="number" class="form-control" name="dismount"  required="" min="1">
+                        <input id="update_dismount" type="number" class="form-control" name="dismount"  required="" min="0" >
                     </div>
                     <div class="form-group">
                         <label>Ảnh đại diện :</label>    
-                        <input required="" type="file" class="form-control-file border" name="img_link">
-                        <img  id="update_img" style="width:100px">
+                        <input  type="file" class="form-control-file border" name="img_link">
+                        <img  id="update_img" style="max-width:300px">
                     </div>
                      <div class="form-group">
                         <label>Ảnh slide 1 :</label>    
                         <input type="file" class="form-control-file border" name="img_link1">
-                         <img  id="update_img1">
+                         <img  id="update_img1" style="max-width:300px">
                     </div>
                      <div class="form-group">
                         <label>Ảnh slide 2 :</label>    
                         <input type="file" class="form-control-file border" name="img_link2">
-                         <img  id="update_img2">
+                         <img  id="update_img2" style="max-width:300px">
                     </div>
                      <div class="form-group">
                         <label>Ảnh slide 3 :</label>    
                         <input type="file" class="form-control-file border" name="img_link3">
-                         <img  id="update_img3">
+                         <img  id="update_img3" style="max-width:300px">
                     </div>
                    <div class="form-group">
                           <label for="comment">Mô tả:</label>
-                          <textarea  name="describes" class="form-control describes" rows="5" id="mota2"></textarea>
+                          <textarea   name="describes" class="form-control describes" rows="5" id="mota2"></textarea>
                         </div>
                 </div>
             </div>
@@ -200,7 +191,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" id="close2" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
         <button type="submit" class="btn btn-primary" >Chấp nhận</button>
     </div>
 </form>

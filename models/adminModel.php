@@ -29,8 +29,23 @@
 			$data = $this->connect()->query($sql);
 			return $data;
 		}
+		public function select_product_by_id($id){
+			$sql="SELECT * FROM `product` WHERE id =$id";
+				$data = $this->connect()->query($sql);
+				$row=$data -> fetch_assoc();
+				return $row;
+				
+		}
 		function select_catalog($id){
 			$sql ="SELECT * FROM `catalog` WHERE `parent_id` = $id";
+			$data = $this->connect()->query($sql);
+			while ($row = $data->fetch_assoc()) {
+			        $results[] = $row;
+			    }   
+			   echo json_encode($results);
+		}
+		function select_all_catalog(){
+			$sql ="SELECT * FROM `catalog` ";
 			$data = $this->connect()->query($sql);
 			while ($row = $data->fetch_assoc()) {
 			        $results[] = $row;
@@ -57,6 +72,14 @@
 			        $results[] = $row;
 			    }   
 			   echo json_encode($results);
+		}
+		public function update_product_id($catalog_id,$name,$price,$dismount,$img_link,$img_link1,$img_link2,$img_link3,$describes,$id){
+			$sql= "UPDATE `product` SET `catalog_id`=$catalog_id,`name`='$name',`price`=$price,`discount`=$dismount,`image_link`='$img_link',`image_link1`='$img_link1',`image_link2`='$img_link2',`image_link3`='$img_link3',`describes`='$describes' WHERE id = $id";
+			if($this->connect()->query($sql)){
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}
 

@@ -481,17 +481,7 @@ $sotin1trang = 8;
 						$data=$adminModel->select_product();
 						include('views/admin/mathang/danhsach.php');	//show-product
 						break;
-					case 'detete-product':
-						if(isset($_GET['id'])){
-								$id= $_GET['id'];
-								if($adminModel->delete_table_id("product",$id)){
-								
-										echo '<script type="text/javascript">window.location="?controller=admin&action=show-product";</script>';
-								}
-								
-
-							}
-						break;
+					
 					default:
 							include('views/admin/dashboard.php');
 						break;
@@ -518,10 +508,12 @@ $sotin1trang = 8;
 							$id = isset($_GET['id'])?$_GET['id']:1;
 							$adminModel->select_catalog($id);
 							break;
+							//onclick=\"edit_product($value[id])\"
 						case 'show-all-product':
 							$data=$adminModel->select_product();
 							foreach ($data as $key => $value) {
 								$count = $value['id']+1;
+								//$des = ​htmlentities($value['describes']);
 								echo " <tr>
                                 <td>".$key."</td>
                                 <td>".$value['id']."</td>
@@ -529,11 +521,11 @@ $sotin1trang = 8;
                                 <td><img src='$value[image_link]' height='100px' ></td>
                                 <td>".number_format($value['price'])."</td>
                                 <td>$value[discount]</td>
-                                <td  id='shorten' style='max-width: 500px;''><p class='hidden-char'>$value[describes]</p></td>
+                                <td  id='shorten' style='max-width: 500px;''><p class='hidden-char'>".htmlentities($value['describes'])."</p></td>
                                 <td>$value[name_catalog]</td>
                                 <td>$value[created]</td>
-                                <td><a onclick=\"return confirm('Bạn có chắc chắn muốn xoá !');\" href='?controller=admin&action=detete-product&param=detete-product&id=$value[id]' class='btn btn-danger'>Xoá</a></td>
-                                <td><button onclick=\"edit_product($value[id])\" class='btn btn-success'>Sửa</button></td>
+                                <td><button data='$value[id]'  class='btn btn-danger btn_delete'>Xoá</button></td>
+                                <td><button data='$value[id]'  class='btn btn-success btn_update'>Sửa</button></td>
                             </tr>";
 							}
 						case 'add-product':
@@ -601,6 +593,81 @@ $sotin1trang = 8;
 								$adminModel->show_product_by_id($id);
 							}
 							break;
+						case 'select_all_catalog':
+							$adminModel->select_all_catalog();
+							break;
+						case 'update_product':
+
+							$id = $_POST['id'];
+							$data = $adminModel->select_product_by_id($id);
+							
+							$name = $_POST['name'];
+							$catalog_id = isset($_POST['catalog_id'])?$_POST['catalog_id']:'null';
+							$price = $_POST['price'];
+							$dismount = $_POST['dismount'];
+							$img_link =$_FILES['img_link'];
+							$describes = $_POST['describes'];
+							
+							if($catalog_id=="null"){
+								echo "<div class='alert alert-danger'>Vui lòng chọn Danh mục </div>";
+							}else{
+								//$extension = explode(".",$img_link['name']);
+								//$end_type = end($extension);
+								//$type = array("jpg","jpeg","png","gif");
+								//if(in_array($end_type, $type)){
+								//	$new_img = rand().".".$end_type;
+								//	$path = "upload/img/".$new_img;
+									
+									if($_FILES['img_link']['name']!==""){
+										$img_name = "upload/img/".rand().$_FILES['img_link']['name'];
+										move_uploaded_file($_FILES['img_link']['tmp_name'], $img_name);
+									}else{
+										$img_name = $data['image_link'];
+									}
+									if($_FILES['img_link1']['name']!==""){
+										$img_name1 = "upload/img/".rand().$_FILES['img_link1']['name'];
+										move_uploaded_file($_FILES['img_link1']['tmp_name'], $img_name1);
+									}else{
+										$img_name1 = $data['image_link1'];
+									}
+									if($_FILES['img_link2']['name']!==""){
+										$img_name2 = "upload/img/".rand().$_FILES['img_link2']['name'];
+										move_uploaded_file($_FILES['img_link2']['tmp_name'], $img_name2);
+									}else{
+										$img_name2 = $data['image_link2'];
+									}
+									if($_FILES['img_link3']['name']!==""){
+										$img_name3 = "upload/img/".rand().$_FILES['img_link3']['name'];
+										move_uploaded_file($_FILES['img_link3']['tmp_name'], $img_name3);
+									}else{
+										$img_name3 = $data['image_link3'];
+									}
+									/*$img_link1 =isset($_FILES['img_link1'])?$_FILES['img_link1']:$_FILES['img_link'];
+									$img_link2 =isset($_FILES['img_link2'])?$_FILES['img_link2']:$_FILES['img_link'];
+									$img_link3 =isset($_FILES['img_link3'])?$_FILES['img_link3']:$_FILES['img_link'];*/
+									
+									//if()){
+										if($adminModel->update_product_id($catalog_id,$name,$price,$dismount,$img_name,$img_name1,$img_name2,$img_name3,$describes,$id)){
+										//	move_uploaded_file($_FILES['img_link']['tmp_name'], $path);
+												echo '<script type="text/javascript">swal("Thông báo!", "Sửa thành công", "success")</script>';
+											
+										}else{
+											echo "<div class='alert alert-danger'>Lỗi ! vui lòng thử lại sau </div>";
+
+										}
+									//}
+									
+								
+							}
+							break;
+						case 'delete_product':
+						if(isset($_POST['id'])){
+								$id=$_POST['id'];
+								$adminModel->delete_table_id("product",$id);
+								echo "$id nè";
+							}
+						echo "sssss";
+						break;
 						default:
 							# code...
 							break;

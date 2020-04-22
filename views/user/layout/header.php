@@ -12,7 +12,15 @@
 						<li><a href="?controller=thoi-trang-nam">Thời trang nam</a></li>
 						<li><a href="?controller=thoi-trang-nu">Thời trang nữ</a></li>
 						<li><a href="?controller=phu-kien">Phụ kiện</a></li>
-						<li><a href="?controller=gioi-thieu">Giới thiệu</a></li>
+						<?php if(isset($_SESSION['user'])){
+							if($_SESSION['user']['level']==2){
+								echo '<li><a href="?controller=admin">Quản lý</a></li>';
+							}else{
+								echo '<li><a href="?controller=gioi-thieu">Giới thiệu</a></li>';
+							}
+							}else{
+								echo '<li><a href="?controller=gioi-thieu">Giới thiệu</a></li>';
+						} ?>
 						<li><a href="?controller=tai-khoan">Tài khoản</a></li>
 						<li><a href="?controller=lien-he">Liên hệ</a></li>
 						<li>
