@@ -47,7 +47,7 @@
 			}
 
 			public function show_all_catalog(){
-				$sql="SELECT count(product.catalog_id) counts,catalog.*  FROM `catalog` LEFT JOIN product On catalog.id = product.catalog_id GROUP BY product.catalog_id";
+				$sql="SELECT count(product.catalog_id) counts,catalog.*  FROM `catalog` LEFT JOIN product On catalog.id = product.catalog_id GROUP BY product.catalog_id order by catalog.name";
 				$data=$this->connect()->query($sql);
 				 return $data;
 			}

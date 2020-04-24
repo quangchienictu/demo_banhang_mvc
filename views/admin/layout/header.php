@@ -15,19 +15,20 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Shop NQC</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
+            <a class="navbar-brand" href="?controller=admin&action=trang-chu">Shop NQC</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
             ><!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                 
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ml-auto ml-md-0">
+                <span style="color: white;margin-top: 7px;"><?=isset($_SESSION['user'])?$_SESSION['user']['username']:'Admin'?></span>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Activity Log</a>
+
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="?controller=admin&action=dang-xuat">Đăng xuất</a>
                     </div>
                 </li>
             </ul>
@@ -39,7 +40,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html"
+                            <a class="nav-link" href="?controller=admin&action=trang-chu"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard</a
                             >
@@ -51,15 +52,15 @@
                                 <div class="sb-nav-link-icon">
                                    <i class="fas fa-cart-plus"></i>
                                 </div> Đơn hàng
-                                <div class="sb-sidenav-collapse-arrow">
-                                    <i class="fas fa-angle-down"></i>
+                                <div style="float: right;margin-left: 60px;">
+                                    <i class="fas fa-caret-down"></i>
                                 </div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                                         </a>
+                            <div > <!-- class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion" -->
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a href="?controller=admin&action=don-hang-moi" class="nav-link">Đơn hàng mới</a>
                                     <a href="?controller=admin&action=dang-gui" class="nav-link">Đang gửi</a>
-                                    <a href="?controller=admin&action=da-nhan" class="nav-link">Đã gửi</a>
+                                    <a href="?controller=admin&action=da-nhan" class="nav-link">Đơn hàng thành công</a>
                                 </nav>
                             </div>
                             <!-- End-One-managament -->
@@ -69,7 +70,7 @@
                                    <i class="fas fa-tshirt"></i>
                                 </div> Mặt hàng
                                 <div class="sb-sidenav-collapse-arrow">
-                                    <i class="fas fa-angle-down"></i>
+                                   
                                 </div>
                             </a>
                            <!--  <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
@@ -81,54 +82,38 @@
                            </div> -->
                             <!-- End-One-managament -->
                                <!-- One-managament -->
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts5">
+                             <a class="nav-link collapsed" href="?controller=admin&action=show-catalog" >
                                 <div class="sb-nav-link-icon">
                                    <i class="fas fa-baby-carriage"></i>
                                 </div> Danh mục
-                                <div class="sb-sidenav-collapse-arrow">
+                                <!-- <div class="sb-sidenav-collapse-arrow">
                                     <i class="fas fa-angle-down"></i>
-                                </div>
+                                </div> -->
                             </a>
-                            <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="diem/danhsach">Danh sách</a>
-                                    <a class="nav-link" href="diem/them">Thêm</a>
-                               
-                                </nav>
-                            </div>
+                          
                             <!-- End-One-managament -->
                               <!-- One-managament -->
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
+                             <a href="?controller=admin&action=show-contact" class="nav-link collapsed"  >
                                 <div class="sb-nav-link-icon">
                                    <i class="fas fa-file-signature"></i>
                                 </div> Phản hồi
-                                <div class="sb-sidenav-collapse-arrow">
+                                <!-- <div class="sb-sidenav-collapse-arrow">
                                     <i class="fas fa-angle-down"></i>
-                                </div>
+                                </div> -->
                             </a>
-                            <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="lop/danhsach">Danh sách</a>
-                               
-                                </nav>
-                            </div>
+                         
                             <!-- End-One-managament -->
                                     
                              <!-- One-managament -->
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts3">
+                               <!-- One-managament -->
+                             <a href="?controller=admin&action=show-user" class="nav-link collapsed"  >
                                 <div class="sb-nav-link-icon">
-                                   <i class="fas fa-users-cog"></i>
+                                   <i class="fas fa-file-signature"></i>
                                 </div> Tài khoản
-                                <div class="sb-sidenav-collapse-arrow">
+                                <!-- <div class="sb-sidenav-collapse-arrow">
                                     <i class="fas fa-angle-down"></i>
-                                </div>
+                                </div> -->
                             </a>
-                            <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="lop/danhsach">Danh sách</a>
-                                     <a class="nav-link" href="lop/danhsach">Thêm</a>
-                                </nav>
-                            </div>
                             <!-- End-One-managament -->
                         </div>
                     </div>

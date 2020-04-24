@@ -7,6 +7,12 @@
 			$data = $this->connect()->query($sql);
 			return $data;
 		}
+		function select_count_transaction($status){
+			$sql ="SELECT count(*) temp FROM `transaction` LEFT JOIN user on user.id = transaction.user_id WHERE status = $status";
+			$data = $this->connect()->query($sql);
+			$row=$data -> fetch_assoc();
+			return $row['temp'];
+		}
 		public function select_order($id_transacsion){
 			$sql ="SELECT `order`.*,product.name,product.image_link FROM `order` LEFT JOIN product ON product.id = `order`.`product_id` WHERE `order`.`transaction_id` = $id_transacsion";
 			$data = $this->connect()->query($sql);
@@ -80,6 +86,88 @@
 			}else{
 				return false;
 			}
+		}
+
+		public function show_all_catalog_catalogparen(){
+			$sql ="SELECT catalog.*,catalog_paren.name name_paren FROM `catalog` LEFT JOIN catalog_paren ON catalog_paren.id = catalog.`parent_id`";
+			$data = $this->connect()->query($sql);
+			return $data;
+		}
+		public function insert_catalog($paren_id,$name){
+			$sql="INSERT INTO `catalog`( `parent_id`, `name`) VALUES ($paren_id,'$name')";
+			if($this->connect()->query($sql)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		public function delete_catalog($id){
+			$sql="DELETE FROM `catalog` WHERE id=$id";
+			$this->connect()->query($sql);
+		}
+			public function show_catalog_by_id($id){
+					$sql="SELECT catalog.*,catalog_paren.name name_paren FROM `catalog` LEFT JOIN catalog_paren ON catalog_paren.id = catalog.`parent_id` where catalog.id=$id";
+				$data = $this->connect()->query($sql);
+			while ($row = $data->fetch_assoc()) {
+			        $results[] = $row;
+			    }   
+			   echo json_encode($results);
+		}
+
+		public function update_catalog($id,$id_paren,$name_catalog){
+			$sql="UPDATE `catalog` SET `parent_id`=$id_paren,`name`='$name_catalog' WHERE id= $id";
+			if($this->connect()->query($sql)){
+				return true;
+			}else{
+				return flase;
+			}
+		}
+		public function select_contact_user_null(){
+			$sql="SELECT * FROM `contact` WHERE user_id is null";
+			$data = $this->connect()->query($sql);
+			while ($row = $data->fetch_assoc()) {
+			        $results[] = $row;
+			    }   
+			   echo json_encode($results);
+		}
+		public function select_contact_user(){
+			$sql="SELECT contact.title,contact.content,contact.time,contact.id ,`user`.`username`,user.fullname,user.email,user.phone,user.address  FROM `contact`,`user` WHERE contact.user_id= `user`.id";
+			$data = $this->connect()->query($sql);
+			while ($row = $data->fetch_assoc()) {
+			        $results[] = $row;
+			    }   
+			   echo json_encode($results);
+		}
+		public function delete_contact($id){
+			$sql = "DELETE FROM `contact` WHERE id=$id";
+			if($this->connect()->query($sql)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		public function select_user(){
+			$sql="SELECT * FROM `user` ";
+			$data = $this->connect()->query($sql);
+			while ($row = $data->fetch_assoc()) {
+			        $results[] = $row;
+			    }   
+			   echo json_encode($results);
+		}
+		public function delete_user($id){
+			$sql = "DELETE FROM `user` WHERE id=$id";
+			if($this->connect()->query($sql)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		public function count_table($table){
+			$sql = "SELECT count(*) temp FROM `$table` ";
+			$data = $this->connect()->query($sql);
+			$row=$data -> fetch_assoc();
+			return $row['temp'];
 		}
 	}
 

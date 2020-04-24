@@ -431,11 +431,17 @@ $sotin1trang = 8;
 			include('views/user/lienhe.php');
 			break;
 		case 'admin':
-
 			if(isset($_SESSION['user'])&&$_SESSION['user']['level']==2){
 				include('views/admin/layout/header.php');
 				switch ($action) {
-					case 'trang-chu':			
+					case 'trang-chu':
+						$count_donhangcho = $adminModel->select_count_transaction(0);
+						$count_donhanggui = $adminModel->select_count_transaction(1);
+						$count_donhangok = $adminModel->select_count_transaction(2);
+						$count_product = $adminModel->count_table('product');
+						$count_catalog = $adminModel->count_table('catalog');
+						$count_contact = $adminModel->count_table('contact');
+						$count_user = $adminModel->count_table('user');
 						include('views/admin/dashboard.php');	
 						break;
 					case 'don-hang-moi':
@@ -479,14 +485,39 @@ $sotin1trang = 8;
 						break;
 					case 'show-product':
 						$data=$adminModel->select_product();
+							foreach ($data as $key => $value) {$count=$value['id']+1;}
 						include('views/admin/mathang/danhsach.php');	//show-product
 						break;
-					
+					case 'show-catalog':
+						
+						include('views/admin/danhmuc/danhsach.php');
+						break;
+					case 'add-catalog':
+						include('view/admin/danhmuc/themmoi.php');
+						break;
+					case 'show-contact':
+						include('views/admin/phanhoi/danhsach.php');
+						break;
+					case 'show-user':
+						include('views/admin/acount/danhsach.php');
+						break;
+					case 'dang-xuat':
+						session_destroy();
+						echo "<script type=\"text/javascript\">location.reload();</script>";
+						break;
 					default:
+						$count_donhangcho = $adminModel->select_count_transaction(0);
+						$count_donhanggui = $adminModel->select_count_transaction(1);
+						$count_donhangok = $adminModel->select_count_transaction(2);
+						$count_product = $adminModel->count_table('product');
+						$count_catalog = $adminModel->count_table('catalog');
+						$count_contact = $adminModel->count_table('contact');
+						$count_user = $adminModel->count_table('user');
 							include('views/admin/dashboard.php');
 						break;
 					
 					}
+
 					include('views/admin/layout/footer.php');
 				}else{
 				header('Location:?controller=trang-chu');
@@ -508,14 +539,13 @@ $sotin1trang = 8;
 							$id = isset($_GET['id'])?$_GET['id']:1;
 							$adminModel->select_catalog($id);
 							break;
-							//onclick=\"edit_product($value[id])\"
+					
 						case 'show-all-product':
 							$data=$adminModel->select_product();
 							foreach ($data as $key => $value) {
-								$count = $value['id']+1;
-								//$des = ​htmlentities($value['describes']);
+								$i = $key+1;
 								echo " <tr>
-                                <td>".$key."</td>
+                                <td>".$i."</td>
                                 <td>".$value['id']."</td>
                                 <td>$value[name]</td>
                                 <td><img src='$value[image_link]' height='100px' ></td>
@@ -539,12 +569,7 @@ $sotin1trang = 8;
 							if($catalog_id=="null"){
 								echo "<div class='alert alert-danger'>Vui lòng chọn Danh mục </div>";
 							}else{
-								//$extension = explode(".",$img_link['name']);
-								//$end_type = end($extension);
-								//$type = array("jpg","jpeg","png","gif");
-								//if(in_array($end_type, $type)){
-								//	$new_img = rand().".".$end_type;
-								//	$path = "upload/img/".$new_img;
+								
 								if($masterModel->link_img($img_link['name'])!=false){
 										$path=$masterModel->link_img($img_link['name']);
 
@@ -566,11 +591,7 @@ $sotin1trang = 8;
 									}else{
 										$img_name3 = $path;
 									}
-									/*$img_link1 =isset($_FILES['img_link1'])?$_FILES['img_link1']:$_FILES['img_link'];
-									$img_link2 =isset($_FILES['img_link2'])?$_FILES['img_link2']:$_FILES['img_link'];
-									$img_link3 =isset($_FILES['img_link3'])?$_FILES['img_link3']:$_FILES['img_link'];*/
 									
-									//if()){
 										if($adminModel->add_product($catalog_id,$name,$price,$dismount,$path,$img_name1,$img_name2,$img_name3,$describes)){
 											move_uploaded_file($_FILES['img_link']['tmp_name'], $path);
 												echo '<script type="text/javascript">swal("Thông báo!", "Thêm thành công", "success")</script>';
@@ -579,13 +600,13 @@ $sotin1trang = 8;
 											echo "<div class='alert alert-danger'>Lỗi ! vui lòng thử lại sau </div>";
 
 										}
-									//}
+							
 								}else{
 									echo "<div class='alert alert-danger'>Vui lòng chọn file ảnh PNG , JPEG , JPG , GIF </div>";
 								}
 							}
 							
-							//$catalog_id,$name,$price,$dismount,$img_link,$img_link1,$img_link2,$img_link3,$describes
+						
 							break;
 						case 'show_product_id':
 							if(isset($_POST['id'])){
@@ -611,13 +632,7 @@ $sotin1trang = 8;
 							if($catalog_id=="null"){
 								echo "<div class='alert alert-danger'>Vui lòng chọn Danh mục </div>";
 							}else{
-								//$extension = explode(".",$img_link['name']);
-								//$end_type = end($extension);
-								//$type = array("jpg","jpeg","png","gif");
-								//if(in_array($end_type, $type)){
-								//	$new_img = rand().".".$end_type;
-								//	$path = "upload/img/".$new_img;
-									
+							
 									if($_FILES['img_link']['name']!==""){
 										$img_name = "upload/img/".rand().$_FILES['img_link']['name'];
 										move_uploaded_file($_FILES['img_link']['tmp_name'], $img_name);
@@ -642,20 +657,16 @@ $sotin1trang = 8;
 									}else{
 										$img_name3 = $data['image_link3'];
 									}
-									/*$img_link1 =isset($_FILES['img_link1'])?$_FILES['img_link1']:$_FILES['img_link'];
-									$img_link2 =isset($_FILES['img_link2'])?$_FILES['img_link2']:$_FILES['img_link'];
-									$img_link3 =isset($_FILES['img_link3'])?$_FILES['img_link3']:$_FILES['img_link'];*/
-									
-									//if()){
+				
 										if($adminModel->update_product_id($catalog_id,$name,$price,$dismount,$img_name,$img_name1,$img_name2,$img_name3,$describes,$id)){
-										//	move_uploaded_file($_FILES['img_link']['tmp_name'], $path);
+									
 												echo '<script type="text/javascript">swal("Thông báo!", "Sửa thành công", "success")</script>';
 											
 										}else{
 											echo "<div class='alert alert-danger'>Lỗi ! vui lòng thử lại sau </div>";
 
 										}
-									//}
+							
 									
 								
 							}
@@ -664,10 +675,115 @@ $sotin1trang = 8;
 						if(isset($_POST['id'])){
 								$id=$_POST['id'];
 								$adminModel->delete_table_id("product",$id);
-								echo "$id nè";
+								
 							}
-						echo "sssss";
+						
 						break;
+						case 'show_all_catalog':
+							$data=$adminModel->show_all_catalog_catalogparen();
+							foreach ($data as $key => $value) {
+								echo " <tr>
+                                <td>".$value['id']."</td>
+                                <td>$value[name]</td>
+                                <td>$value[name_paren]</td>
+                                <td><button data='$value[id]'  class='btn btn-danger btn_delete_catalog'>Xoá</button></td>
+                                <td><button data='$value[id]'  class='btn btn-success btn_update_catalog'>Sửa</button></td>
+                         	   </tr>";
+							}
+							break;
+						case 'add_catalog':
+							if(isset($_POST['id'])&&isset($_POST['catalog'])){
+								$id = $_POST['id'];
+								$catalog =$_POST['catalog'];
+								if($adminModel->insert_catalog($id,$catalog)){
+									echo '<script type="text/javascript">swal("Thông báo!", "Thêm thành công", "success")</script>';
+								}else{
+									echo "<div class='alert alert-danger'>Lỗi ! vui lòng thử lại sau </div>";
+								}
+							}
+							break;
+						case 'delete_catalog':
+							if(isset($_POST['id'])){
+								$adminModel->delete_catalog($_POST['id']);
+							}
+							break;
+						case 'show_catalog_id':
+						if(isset($_POST['id'])){
+							$adminModel->show_catalog_by_id($_POST['id']);
+						}
+							
+							break;
+						case 'update_catalog':
+							if(isset($_POST['id_catalog_paren'])&&isset($_POST['name_catalog'])&&isset($_POST['id'])){
+								$id_catalog_paren = $_POST['id_catalog_paren'];
+								$name_catalog = $_POST['name_catalog'];	
+								$id = $_POST['id'];
+								if($adminModel->update_catalog($id,$id_catalog_paren,$name_catalog)){
+									echo '<script type="text/javascript">swal("Thông báo!", "Thêm thành công", "success")</script>';
+								}else{
+									echo "<div class='alert alert-danger'>Lỗi ! vui lòng thử lại sau </div>";
+								}
+							}
+							break;
+						case 'select_contact_user_null':
+							$adminModel->select_contact_user_null();
+							# code...
+							break;
+						case 'select_contact_user':
+							$adminModel->select_contact_user();						
+							# code...
+							break;
+						case 'delete_contact_user':
+							if(isset($_POST['id'])){
+								$adminModel->delete_contact($_POST['id']);
+							}				
+							# code...
+							break;
+						case 'select_user':
+							$adminModel->select_user();		
+							break;
+						case 'delete_user':
+							if(isset($_POST['id'])){
+								$adminModel->delete_user($_POST['id']);
+							}		
+							break;
+						case 'check-user':
+
+							if(isset($_POST['user'])){
+								if( $masterModel->select_user($_POST['user'])){
+								 	echo "1";
+								}else{echo "0";}
+							}
+							break;
+						case 'add_user':
+							if(isset($_POST['username'])&&isset($_POST['password'])&&isset($_POST['name'])&&isset($_POST['email'])&&isset($_POST['address'])&&isset($_POST['phone'])&&isset($_POST['level'])){
+								$username = $_POST['username'];
+								$password = $_POST['password'];
+								$name = $_POST['name'];
+								$email = $_POST['email'];
+								$address = $_POST['address'];
+								$phone = $_POST['phone'];
+								$level = $_POST['level'];	
+								$masterModel->insert_user2($username,$password,$name,$email,$address,$phone,$level);
+							}
+							break;
+						case 'select_user_id':
+							if(isset($_POST['id'])){
+								$masterModel->show_user_by_id($_POST['id']);
+							}
+							break;
+						case 'update_user_id':
+							if(isset($_POST['id'])){
+								$id = $_POST['id'];
+								$password = $_POST['password'];
+								$name = $_POST['name'];
+								$email = $_POST['email'];
+								$address = $_POST['address'];
+								$phone = $_POST['phone'];
+								$level = $_POST['level'];	
+								$masterModel->update_user_id($id,$password,$name,$email,$address,$phone,$level);
+							}
+							break;
 						default:
 							# code...
 							break;

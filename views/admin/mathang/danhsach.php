@@ -27,22 +27,7 @@
                     </thead>
 
                     <tbody id="show_product">
-                     <!-- <?php foreach ($data as $key => $value):?>
-                            <tr>
-                                <?php $count = $value['id']+1; ?>
-                                <td><?=$key+1?></td>
-                                <td><?=$value['id']?></td>
-                                <td><?=$value['name']?></td>
-                                <td><img src="<?=$value['image_link']?>" height="100px" ></td>
-                                <td><?=number_format($value['price'])?></td>
-                                <td><?=$value['discount']?></td>
-                                <td  id="shorten" style="max-width: 500px;"><p class="hidden-char"><?=$value['describes']?></p></td>
-                                <td><?=$value['name_catalog']?></td>
-                                <td><?=$value['created']?></td>
-                                <td><a href="?controller=admin&action=mat-hang&param=delete&id=<?=$value['id']?>" class="btn btn-danger">Xoá</a></td>
-                                <td><a href="?controller=admin&action=mat-hang&param=update&id=<?=$value['id']?>" class="btn btn-success">Sửa</a></td>
-                            </tr>
-                        <?php endforeach ?>  -->
+                     
                     </tbody>
                 </table>
             </div>
@@ -89,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label>Giảm giá :</label>    
-                        <input type="number" class="form-control" name="dismount"  required="" min="1" value="0">
+                        <input type="number" class="form-control" name="dismount"  required="" min="0" value="0">
                     </div>
                     <div class="form-group">
                         <label>Ảnh đại diện :</label>    
