@@ -1,5 +1,5 @@
  load_product();
-
+add_product_ajax();
 
  function show(id){
  	$.ajax({
@@ -29,52 +29,54 @@
  }
  function  add_product() {
  	$("#mathang").modal('show');
- 	CKEDITOR.replace( 'mota' );
- 	$("#thoitrang").on('change',function(){
- 		var id = $(this).val();
- 		$.ajax({
- 			url : "?controller=admin-ajax&action=danh-sach-catalog&id="+id,
- 			method:"get",
- 			dataType:"json",
+ 	
+ }
+function add_product_ajax(){
+     CKEDITOR.replace( 'mota' );
+     $("#thoitrang").on('change',function(){
+          var id = $(this).val();
+          $.ajax({
+               url : "?controller=admin-ajax&action=danh-sach-catalog&id="+id,
+               method:"get",
+               dataType:"json",
 
- 		}).done(function(data){
- 			let employee="<option value='null' selected >--Lựa chọn--</option>";  
- 			$.each(data,function(key,value){
- 				employee +=" <option value='"+value.id+"'>"+value.name+"</option>";    
- 			});
- 			$("#dm").html(employee);
- 		});
- 	});
+          }).done(function(data){
+               let employee="<option value='null' selected >--Lựa chọn--</option>";  
+               $.each(data,function(key,value){
+                    employee +=" <option value='"+value.id+"'>"+value.name+"</option>";    
+               });
+               $("#dm").html(employee);
+          });
+     });
 
 
- 	$("#create_product").on("submit",function(e){
- 		e.preventDefault();
- 		for ( instance in CKEDITOR.instances ) {
- 			CKEDITOR.instances[instance].updateElement();
- 		}
+     $("#create_product").on("submit",function(e){
+          e.preventDefault();
+          for ( instance in CKEDITOR.instances ) {
+               CKEDITOR.instances[instance].updateElement();
+          }
           //  var name = $("[name=describes]").val();
           var data = new FormData(this);
 
           //  data.append('describes', CKEDITOR.instances['describes'].getData());
           $.ajax({
-          	url :"?controller=admin-ajax&action=add-product",
-          	method:"post",
-          	data :data ,
-          	contentType:false,
-          	processData:false
+               url :"?controller=admin-ajax&action=add-product",
+               method:"post",
+               data :data ,
+               contentType:false,
+               processData:false
 
           }).done(function(data){
-          	$("#alert").html(data);
+               $("#alert").html(data);
 
-          	$("#mathang").modal('hide');
-          	setTimeout(function(){
-          		location.reload();
-          	}, 1000);
+               $("#mathang").modal('hide');
+               setTimeout(function(){
+                    location.reload();
+               }, 1000);
           });
 
       });
- }
-
+}
 
 
  CKEDITOR.replace( 'mota2');
@@ -167,3 +169,4 @@
 
 
 //catalog
+

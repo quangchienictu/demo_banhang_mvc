@@ -23,6 +23,7 @@
 <script type="text/javascript" src="public/js/admin.js"></script>
 <script type="text/javascript" src="public/js/user.js"></script>
 <script type="text/javascript" src="public/js/contact.js"></script>
+<script type="text/javascript" src="public/js/blog.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 

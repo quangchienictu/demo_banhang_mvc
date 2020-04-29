@@ -494,3 +494,25 @@ footer  .copy-right div:last-child{
 }
 /* footer */
 
+.owl-carousel .item a{
+    color: black;
+}
+.owl-carousel .item a img{
+    margin-bottom: 10px;
+}
+.owl-carousel .item a span{
+    margin-left: 10px;
+}
+.review{
+        max-width: 1300px !important
+}
+.review >.row h4{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.review >.row{
+    margin: 30px;
+}
+.review .row:last-child{
+    margin-bottom: 50px;
+}

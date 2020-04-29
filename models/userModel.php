@@ -163,6 +163,17 @@
 				}
 				
 			}
+			public function select_blog(){
+					$sql = "SELECT blog.* ,user.username name_author FROM `blog`,user where blog.author = user.id";
+				$data=$this->connect()->query($sql);
+				 return $data;
+			}
+			public function select_blog_id($id){
+					$sql = "SELECT blog.* ,user.username name_author FROM `blog`,user where blog.author = user.id and blog.id=$id";
+				$data=$this->connect()->query($sql);
+				 	$row=$data -> fetch_assoc();
+				return $row;
+			}
 
 	}
 

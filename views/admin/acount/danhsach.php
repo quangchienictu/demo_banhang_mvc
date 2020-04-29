@@ -3,7 +3,7 @@
     <div class="card mb-4 p-3">
 
         <div class="table-responsive">
-            <button class="btn btn-primary mb-4 mr-4 mt-4" style="float: right;margin-left: 50px;" onclick="show_add_user();">Thêm mới</button>
+            <a class="btn btn-primary mb-4 mr-4 mt-4" style="float: right;margin-left: 50px;" href="?controller=admin&action=add-blog">Thêm mới</a>
             <table class="table table-bordered"  width="100%" cellspacing="0">
                 <thead>
                     <tr>

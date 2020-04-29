@@ -108,13 +108,21 @@
                                <!-- One-managament -->
                              <a href="?controller=admin&action=show-user" class="nav-link collapsed"  >
                                 <div class="sb-nav-link-icon">
-                                   <i class="fas fa-file-signature"></i>
+                                   <i class="fas fa-users"></i>
                                 </div> Tài khoản
                                 <!-- <div class="sb-sidenav-collapse-arrow">
                                     <i class="fas fa-angle-down"></i>
                                 </div> -->
                             </a>
                             <!-- End-One-managament -->
+                             <a href="?controller=admin&action=show-blog" class="nav-link collapsed"  >
+                                <div class="sb-nav-link-icon">
+                                 <i class="fas fa-address-card"></i>
+                                </div> Blog
+                                <!-- <div class="sb-sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div> -->
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

@@ -162,13 +162,45 @@
 				return false;
 			}
 		}
-
+		public function select_blog(){
+			$sql="SELECT blog.*,user.username author_name FROM `blog`,user where blog.author=user.id ";
+			$data = $this->connect()->query($sql);
+			return $data;
+		}
+		public function delete_blog($id){
+			$sql="DELETE FROM `blog` WHERE id = $id";
+			 $this->connect()->query($sql);
+			
+		}
 		public function count_table($table){
 			$sql = "SELECT count(*) temp FROM `$table` ";
 			$data = $this->connect()->query($sql);
 			$row=$data -> fetch_assoc();
 			return $row['temp'];
 		}
+		public function insert_blog($author,$tile,$image,$content){
+			$sql ="INSERT INTO `blog`( `author`, `title`, `image`, `content`) VALUES ($author,'$tile','$image','$content')";
+			if( $this->connect()->query($sql)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		public function select_blog_id($id){
+			$sql ="SELECT * from blog where id = $id";
+			$data = $this->connect()->query($sql);
+			$row=$data -> fetch_assoc();
+			return $row;
+		}
+		public function update_blog($author,$title,$image,$content,$id){
+			$sql="UPDATE `blog` SET `author`=$author,`title`='$title',`image`='$image',`content`='$content'WHERE id=$id";
+			if( $this->connect()->query($sql)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
 	}
 
  ?>

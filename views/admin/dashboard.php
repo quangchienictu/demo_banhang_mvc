@@ -75,6 +75,16 @@
                                     </div>
                                 </div>
                             </div>
+                              <div class="col-xl-3 col-md-6">
+                                <div class="card text-white mb-4" style="background-color: #5610ff;">
+                                    <div class="card-body">Số lượng blog :
+                                        <h2><?=$count_blog?></h2></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="?controller=admin&action=show-blog">Xem chi tiết</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                        <!--  <div class="row">
                            <div class="col-xl-6">

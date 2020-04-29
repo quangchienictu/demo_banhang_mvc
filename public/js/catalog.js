@@ -1,5 +1,5 @@
 load_catalog();
-
+add_catalog_ajax();
 function load_catalog(){
 	$.ajax({
 		url : "?controller=admin-ajax&action=show_all_catalog",
@@ -12,6 +12,9 @@ function load_catalog(){
 }
 function add_catalog(){
 	$("#add_catalog_modal").modal('show');
+}
+
+function add_catalog_ajax(){
 	$("#add_catalog_modal").on("submit",function(e){
 		var id = $("#update_product")[0].elements[0].value;
 		var catalog = $("#update_product")[0].elements[1].value;
@@ -32,7 +35,6 @@ function add_catalog(){
 		}
 
 	});
-
 }
 $(document).on("click",".btn_delete_catalog",function(){
 	let id = $(this).attr('data');

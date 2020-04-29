@@ -13,7 +13,7 @@ if(isset($_GET['controller'])){
 if(isset($_GET['action'])){
 	$action = $_GET['action'];
 }else $action = '';
-$sotin1trang = 8;
+$sotin1trang = 12;
 
 	switch ($control) {
 		case 'ajax':
@@ -151,6 +151,15 @@ $sotin1trang = 8;
 						break;
 				}	
 			
+			break;
+		case 'blog':
+			if(isset($_GET['id'])){
+				$id = $_GET['id']; //select_blog_id
+				$data= $userModel-> select_blog_id($id);
+					include('views/user/blog.php');
+			}else{
+				header('Location:?controller=trang-chu');
+			}
 			break;
 		case 'gioi-thieu':
 			include('views/user/gioithieu.php');
@@ -291,6 +300,7 @@ $sotin1trang = 8;
 			$data1=  $userModel->show_all_product_by_catalogparent_limit8('Thời trang nữ');
 			$data2=  $userModel->show_all_product_by_catalogparent_limit8('Thời trang nam');
 			$data3=  $userModel->show_all_product_by_catalogparent_limit8('Phụ kiện');
+			$data4 =  $userModel->select_blog();
 			include('views/user/index.php');
 			break;
 		case 'chi-tiet':
@@ -442,6 +452,7 @@ $sotin1trang = 8;
 						$count_catalog = $adminModel->count_table('catalog');
 						$count_contact = $adminModel->count_table('contact');
 						$count_user = $adminModel->count_table('user');
+						$count_blog = $adminModel->count_table('blog');
 						include('views/admin/dashboard.php');	
 						break;
 					case 'don-hang-moi':
@@ -501,6 +512,63 @@ $sotin1trang = 8;
 					case 'show-user':
 						include('views/admin/acount/danhsach.php');
 						break;
+					case 'show-blog':
+						$data = $adminModel->select_blog();
+						include('views/admin/blog/danhsach.php');
+						break;
+					case 'add-blog':	
+						if(isset($_POST['submit'])){
+							$title = $_POST['title'];
+							$img_link = $_FILES['img'];
+							$content = $_POST['content'];
+							$author = $_SESSION['user']['id'];
+							if($masterModel->link_img($img_link['name'])!=false){
+									$path=$masterModel->link_img($img_link['name']);
+									move_uploaded_file($img_link['tmp_name'], $path);
+									if($adminModel->insert_blog($author,$title,$path,$content)){
+										$_SESSION['alert'] = "<div class=\"alert alert-success\"><strong>Thông báo !</strong> Thêm mới thành công -> <a href=\"?controller=admin&action=show-blog\" class=\"alert-link\">Danh sách </a>.</div>";
+									}else{
+										$_SESSION['alert'] = "<div class=\"alert alert-danger\"><strong>Thông báo !</strong>Thêm thất bại </div>";
+									}
+							}
+							else{
+								$_SESSION['alert'] = "<div class=\"alert alert-danger\"><strong>Thông báo !</strong> Vui lòng chọn file ảnh PNG, JPEG , JPG , GIF </div>";
+							}
+							
+						}
+						include('views/admin/blog/themmoi.php');
+						break;
+					case 'edit-blog':
+						if(isset($_GET['id'])){
+							$data = $adminModel->select_blog_id($_GET['id']);
+							if(isset($_POST['submit'])){
+							$id =$_GET['id'];
+							$title = $_POST['title'];
+							$img_link = $_FILES['img'];
+							$content = $_POST['content'];
+							$author = $_SESSION['user']['id'];
+							//echo htmlentities($content);
+							if($img_link['name']!==""){
+								if($masterModel->link_img($img_link['name'])!=false){
+									$path=$masterModel->link_img($img_link['name']);
+									move_uploaded_file($img_link['tmp_name'], $path);
+								}else{
+									$_SESSION['alert'] = "<div class=\"alert alert-danger\"><strong>Thông báo !</strong> Vui lòng chọn file ảnh PNG, JPEG , JPG , GIF </div>";
+								}
+							}else{
+								$path=$data['image'];
+							}
+							
+
+							if($adminModel->update_blog($author,$title,$path,$content,$id)){
+										$_SESSION['alert'] = "<div class=\"alert alert-success\"><strong>Thông báo !</strong> Thêm mới thành công -> <a href=\"?controller=admin&action=show-blog\" class=\"alert-link\">Danh sách </a>.</div>";
+									}else{
+										$_SESSION['alert'] = "<div class=\"alert alert-danger\"><strong>Thông báo !</strong>Thêm thất bại </div>";
+									}
+						}
+							include('views/admin/blog/sua.php');
+						}
+						break;
 					case 'dang-xuat':
 						session_destroy();
 						echo "<script type=\"text/javascript\">location.reload();</script>";
@@ -513,6 +581,7 @@ $sotin1trang = 8;
 						$count_catalog = $adminModel->count_table('catalog');
 						$count_contact = $adminModel->count_table('contact');
 						$count_user = $adminModel->count_table('user');
+						$count_blog = $adminModel->count_table('blog');
 							include('views/admin/dashboard.php');
 						break;
 					
@@ -783,6 +852,13 @@ $sotin1trang = 8;
 								$level = $_POST['level'];	
 								$masterModel->update_user_id($id,$password,$name,$email,$address,$phone,$level);
 							}
+							break;
+							case 'delete-blog':
+								if(isset($_POST['id'])){
+									//
+									$adminModel->delete_blog($_POST['id']);
+									
+								}
 							break;
 						default:
 							# code...

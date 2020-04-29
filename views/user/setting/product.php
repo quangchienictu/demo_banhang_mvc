@@ -11,7 +11,7 @@
 				<tr>
 				<td><?=$value['id']?></td>
 				<td><?=$value['amount']?></td>
-				<td><?php if($value['status']==0){echo "Đang chờ lấy hàng";}else if($value['status']==1){echo "Đang gửi";}else echo "Đã gửi"; ?></td>
+				<td><?php if($value['status']==0){echo "Đang chờ lấy hàng";}else if($value['status']==1){echo "Đang giao hàng";}else echo "Thành công"; ?></td>
 			</tr>
 			<?php endforeach ?>
 			
