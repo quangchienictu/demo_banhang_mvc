@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="public/css/tatcahang.css">
 	<link rel="stylesheet" type="text/css" href="public/css/chi-tiet.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2052739441722696&autoLogAppEvents=1"></script>
 </head>
 <body>
 
@@ -36,7 +36,9 @@
 						<p> <a href="">Trang chủ </a> / <span><?=$breadcrumb['paren']?></span> / <span><?=$breadcrumb['child']?></span></p>
 						<h1><?=$data['name']?></h1>
 						<h2 id="price"><span><?php if($data['discount']>0){ 
-										echo number_format($data['price']+$data['discount']);
+										$sell= FLOOR($data['discount']/$data['price']*100);
+										
+										echo number_format($data['price']+$data['discount'])."<span>₫</span>";
 							 } ?></span><?=number_format($data['price'])?><span>₫</span></h2>
 						
 						<div class="row">
@@ -58,6 +60,7 @@
 							</div>
 
 						</div>
+						
 						<div class="row">
 							<div class="col-md-6">
 								<label for="sel1">Số lượng</label><br>
@@ -66,6 +69,17 @@
 									<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>
 								</div>
 
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-md-12 mt-2">
+								<label><b>Thời trang</b> : <?=$breadcrumb['paren']?></label>
+							</div>
+							<div class="col-md-12 mt-2">
+								<label><b>Danh mục</b> : <?=$breadcrumb['child']?></label>
+							</div>
+							<div class="col-md-12 mt-2">
+								<label><b>Giảm giá</b> : <b style="color: red;"><?=isset($sell)?$sell:0?>%</b></label>
 							</div>
 						</div>
 					</div>
@@ -77,15 +91,19 @@
 					</div>
 					
 				</div>
+				
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
+		<div class="row text-center">
+			<div class="col-md-7 " >
 				<h3>MÔ TẢ SẢN PHẨM</h3>
 				<p><?=$data['describes']==''?"Không có mô tả":$data['describes']?>
 			</p>
 			</div>
-
+			<div class="col-md-5 ">
+					<h3>NHẬN XÉT</h3>
+					<div class="fb-comments" data-href='<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>' data-numposts="5" data-width=""></div>
+				</div>
 		</div>
 	</div>
 	
@@ -93,7 +111,10 @@
 <footer id="footer">
 	
 </footer>
+
+<div id="fb-root"></div>
 </body>
+
 <script type="text/javascript">
 	var container = document.getElementById("img-container");
 

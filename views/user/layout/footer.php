@@ -39,7 +39,7 @@
 					<div class="show">
 						<h3>Fanpage Facebook</h3>
 						<ul>
-							<li><iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fblogyeuthuong0%2F&tabs=timeline&width=300&height=150&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=2052739441722696" width="300" height="150" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe></li>
+							<li><div class="fb-page" data-href="https://www.facebook.com/blogyeuthuong0/" data-tabs="message" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/blogyeuthuong0/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/blogyeuthuong0/">Blog Yêu Thương</a></blockquote></div></li>
 
 						</ul>
 					</div>
