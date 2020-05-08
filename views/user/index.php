@@ -80,19 +80,22 @@
 					
 					<?php while($row = $data1->fetch_assoc()){ ?>
 						<div class="col-md-3">
+							
 							<div class="card">
-								<img src="<?=$row['image_link']?>">
-								<div class="content">
-									<h2><?=$row['name']?></h2>
-									<?php if($row['discount']>0){ ?>
-										<p class="sell"><?=number_format($row['price']+$row['discount'])?><span> ₫</span></p>
-									<?php } ?>
-									<p><?=number_format($row['price'])?><span><u> ₫</u></span></p>
-									<a href="?controller=chi-tiet&id=<?=$row['id']?>">Xem</a>
-
-
-								</div>
+								<a href="?controller=chi-tiet&id=<?=$row['id']?>">
+									<img src="<?=$row['image_link']?>">
+								</a>
+									<div class="content">
+										<h2><?=$row['name']?></h2>
+										<?php if($row['discount']>0){ ?>
+											<p class="sell"><?=number_format($row['price']+$row['discount'])?><span> ₫</span></p>
+										<?php } ?>
+										<p><?=number_format($row['price'])?><span><u> ₫</u></span></p>
+										<button onclick="cart(<?=$row['id']?>)">Thêm vào giỏ hàng</button>
+									</div>
+								
 							</div>
+							
 						</div>
 					<?php } ?>
 					
@@ -103,14 +106,16 @@
 					<?php while($row = $data2->fetch_assoc()){ ?>
 						<div class="col-md-3">
 							<div class="card">
+								<a href="?controller=chi-tiet&id=<?=$row['id']?>">
 								<img src="<?=$row['image_link']?>">
+								</a>
 								<div class="content">
 									<h2><?=$row['name']?></h2>
 									<?php if($row['discount']>0){ ?>
 										<p class="sell"><?=number_format($row['price']+$row['discount'])?><span> ₫</span></p>
 									<?php } ?>
 									<p><?=number_format($row['price'])?><span><u> ₫</u></span></p>
-									<a href="?controller=chi-tiet&id=<?=$row['id']?>">Xem</a>
+									<button onclick="cart(<?=$row['id']?>)">Thêm vào giỏ hàng</button>
 									
 								</div>
 							</div>
@@ -127,14 +132,16 @@
 					<?php while($row = $data3->fetch_assoc()){ ?>
 						<div class="col-md-3">
 							<div class="card">
+								<a href="?controller=chi-tiet&id=<?=$row['id']?>">
 								<img src="<?=$row['image_link']?>">
+								</a>
 								<div class="content">
 									<h2><?=$row['name']?></h2>
 									<?php if($row['discount']>0){ ?>
 										<p class="sell"><?=number_format($row['price']+$row['discount'])?><span> ₫</span></p>
 									<?php } ?>
 									<p><?=number_format($row['price'])?><span><u>đ</u></span></p>
-									<a href="?controller=chi-tiet&id=<?=$row['id']?>">Xem</a>
+									<button onclick="cart(<?=$row['id']?>)">Thêm vào giỏ hàng</button>
 								</div>
 							</div>
 						</div>
@@ -233,21 +240,21 @@
 						<div class="row" >
 							<div class="owl-carousel owl-theme">
 								<?php foreach ($data4 as $key => $value): ?>
-								<div class="item">
-									<a href="?controller=blog&id=<?=$value['id']?>"> 
-										<img src="<?=$value['image'] ?>" width="100%" height="215px">
-										<h4><?=$value['title'] ?></h4>
-										<div class="row">
-											<div class="col-md-4">
-												<i class="fas fa-user"></i><span><?=$value['name_author'] ?></span>
+									<div class="item">
+										<a href="?controller=blog&id=<?=$value['id']?>"> 
+											<img src="<?=$value['image'] ?>" width="100%" height="215px">
+											<h4><?=$value['title'] ?></h4>
+											<div class="row">
+												<div class="col-md-4">
+													<i class="fas fa-user"></i><span><?=$value['name_author'] ?></span>
+												</div>
+												<div class="col-md-6">
+
+													<i class="far fa-calendar-alt"></i><span><?=explode(" ", $value['time'])[0] ?></span>
+												</div>
 											</div>
-											<div class="col-md-6">
-												
-												<i class="far fa-calendar-alt"></i><span><?=explode(" ", $value['time'])[0] ?></span>
-											</div>
-										</div>
-									</a>
-								</div>
+										</a>
+									</div>
 								<?php endforeach ?>
 								
 							</div>
@@ -258,7 +265,7 @@
 
 				</footer>
 			</body>
-
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 			<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -296,4 +303,21 @@
 
 
 			</script>
+			<script type="text/javascript">
+			function cart(id){
+				var number = 1;
+				var size = "S";
+				$.post('?controller=chi-tiet&id='+id+'&cart',{'id':id,'number':number,'size':size},function(data){
+
+				});
+				Swal.fire({
+					icon: 'success',
+					title: 'Thêm vào giỏ hàng thành công !',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(function(){location.reload(); }, 1000);
+
+			}
+		</script>
 			</html>

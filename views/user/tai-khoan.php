@@ -95,15 +95,15 @@
 							<div id="alert">
 							<!-- 	<div class="alert alert-success mt-3">
 							<strong>Success!</strong> Indicates a successful or positive action.
-							</div> -->
-							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
+
+</div>
+</div>
 <?php } else { ?>
 	<div class="container info">
 		<div class="row">
@@ -156,44 +156,6 @@
 <script type="text/javascript" src="public/js/cart.js"></script>
 <script type="text/javascript" src="public/js/footer.js"></script>
 <script type="text/javascript">
-
-
-	$("#dangky").on('click',function(){
-		var user = $("#user").val();
-		var phone = $("#phone").val();
-		var pass = $("#pass").val();
-		var pass2 = $("#pass2").val();
-		var name = $("#name").val();
-		var address = $("#address").val();
-		if(user==''||phone==''||pass==''||pass2==''||name==''||address==''){
-			$("#alert").html("<div class='alert alert-danger mt-3'><strong>Thông báo!</strong> Các trường không được để trống</div>");
-
-		}else{
-			if(pass!=pass2){
-				$("#alert").html("<div class='alert alert-danger mt-3'><strong>Thông báo!</strong> Nhập lại mật khẩu không đúng.</div>");
-			}else{
-				$.ajax({
-					url:'?controller=ajax&action=dang-ky',
-					method : 'POST',
-					dataType: 'html',
-					data: {
-	                    user: user,
-	                    phone: phone,
-                    	pass :pass,
-                    	name:name,
-                    	address:address
-               		 }
-				}).done(function(ketqua){
-					$("#user").val('');
-					$("#phone").val('');
-					$("#pass").val('');
-					$("#pass2").val('');
-					$("#name").val('');
-					$("#address").val('');
-					$("#alert").html(ketqua);
-				});
-			}
-		}
-	});
+	
 </script>
 </html>

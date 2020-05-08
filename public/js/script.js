@@ -24,6 +24,7 @@ $(document).ready(function(){
 	});
 	
 
+
 	function aimation(body,selector,class_name,element){
 		if(body>selector-1000){
 				$(element).addClass(class_name);

@@ -48,7 +48,7 @@
 		</div>
 		<div class="container-fluid">
 			<div class="container">
-				<div class="row copy-right">
+				<div class="row copy-right col-md-6">
 					<div class="col-md-6">
 						<p>Copyright © 2020 NQC</p> 
 					</div>

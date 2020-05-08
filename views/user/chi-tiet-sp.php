@@ -95,14 +95,14 @@
 			</div>
 		</div>
 		<div class="row text-center">
-			<div class="col-md-7 " >
+			<div class="col-md-7 motasp" >
 				<h3>MÔ TẢ SẢN PHẨM</h3>
 				<p><?=$data['describes']==''?"Không có mô tả":$data['describes']?>
 			</p>
 			</div>
 			<div class="col-md-5 ">
 					<h3>NHẬN XÉT</h3>
-					<div class="fb-comments" data-href='<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>' data-numposts="5" data-width=""></div>
+					<div class="fb-comments" width="100%" data-href='<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>' data-numposts="5" data-width="100%"></div>
 				</div>
 		</div>
 	</div>
