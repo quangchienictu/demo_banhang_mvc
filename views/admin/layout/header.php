@@ -56,7 +56,7 @@
                                     <i class="fas fa-caret-down"></i>
                                 </div>
                                                          </a>
-                            <div > <!-- class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion" -->
+                            <div  class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion" >
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a href="?controller=admin&action=don-hang-moi" class="nav-link">Đơn hàng mới</a>
                                     <a href="?controller=admin&action=dang-gui" class="nav-link">Đang gửi</a>
