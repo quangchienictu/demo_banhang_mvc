@@ -200,7 +200,24 @@
 				return false;
 			}
 		}
-
+		public function total_month(){
+			$sql="SELECT SUM(transaction.amount) as tongtien FROM transaction WHERE MONTH(transaction.created)  = MONTH(CURDATE())";
+			$data = $this->connect()->query($sql);
+			$row=$data -> fetch_assoc();
+			return $row;
+		}
+		public function total_day(){
+			$sql="SELECT SUM(transaction.amount) as tongtien FROM transaction WHERE DAY(transaction.created)  = DAY(CURDATE())";
+			$data = $this->connect()->query($sql);
+			$row=$data -> fetch_assoc();
+			return $row;
+		}
+		public function total_year(){
+			$sql="SELECT SUM(transaction.amount) as tongtien FROM transaction WHERE YEAR(transaction.created) = YEAR(CURDATE())";
+			$data = $this->connect()->query($sql);
+			$row=$data -> fetch_assoc();
+			return $row;
+		}
 	}
 
  ?>

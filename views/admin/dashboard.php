@@ -85,6 +85,41 @@
                                     </div>
                                 </div>
                             </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                              <ol class="breadcrumb mb-4">
+                                <li class="breadcrumb-item active">Doanh thu</li>
+                        </ol>
+                            </div>
+                              <div class="col-xl-3 col-md-6">
+                                <div class="card text-white mb-4" style="background-color: #5610ff;">
+                                    <div class="card-body">Doanh thu trong ngày:
+                                        <h2><?=number_format($day['tongtien'])?><span class="ml-1"></h2></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-xl-3 col-md-6">
+                                <div class="card text-white mb-4" style="background-color: #5610ff;">
+                                    <div class="card-body">Doanh thu trong tháng:
+                                        <h2><?=number_format($month['tongtien'])?><span class="ml-1"></h2></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-xl-3 col-md-6">
+                                <div class="card text-white mb-4" style="background-color: #5610ff;">
+                                    <div class="card-body">Doanh thu trong năm:
+                                        <h2><?=number_format($year['tongtien'])?><span class="ml-1">đ</span></h2></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                        <!--  <div class="row">
                            <div class="col-xl-6">

@@ -453,6 +453,9 @@ $sotin1trang = 12;
 						$count_contact = $adminModel->count_table('contact');
 						$count_user = $adminModel->count_table('user');
 						$count_blog = $adminModel->count_table('blog');
+						$day = $adminModel->total_day();
+						$month = $adminModel->total_month();
+						$year = $adminModel->total_year();
 						include('views/admin/dashboard.php');	
 						break;
 					case 'don-hang-moi':
@@ -582,6 +585,9 @@ $sotin1trang = 12;
 						$count_contact = $adminModel->count_table('contact');
 						$count_user = $adminModel->count_table('user');
 						$count_blog = $adminModel->count_table('blog');
+						$day = $adminModel->total_day();
+						$month = $adminModel->total_month();
+						$year = $adminModel->total_year();
 							include('views/admin/dashboard.php');
 						break;
 					
