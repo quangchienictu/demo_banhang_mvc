@@ -26,8 +26,24 @@
                         </tr>
                     </thead>
 
-                    <tbody id="show_product">
-                     
+                    <tbody >
+                     <?php 
+                     foreach ($data as $key => $value) {
+                                $i = $key+1;
+                                echo " <tr>
+                                <td>".$i."</td>
+                                <td>".$value['id']."</td>
+                                <td>$value[name]</td>
+                                <td><img src='$value[image_link]' height='100px' ></td>
+                                <td>".number_format($value['price'])."</td>
+                                <td>$value[discount]</td>
+                                <td  id='shorten' style='max-width: 500px;''><p class='hidden-char'>".htmlentities($value['describes'])."</p></td>
+                                <td>$value[name_catalog]</td>
+                                <td>$value[created]</td>
+                                <td><button data='$value[id]'  class='btn btn-danger btn_delete'>Xoá</button></td>
+                                <td><button data='$value[id]'  class='btn btn-success btn_update'>Sửa</button></td>
+                            </tr>";
+                            } ?>
                     </tbody>
                 </table>
             </div>

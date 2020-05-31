@@ -498,7 +498,7 @@ $sotin1trang = 12;
 						include('views/admin/donhang/danhan.php');	
 						break;
 					case 'show-product':
-						$data=$adminModel->select_product();
+							$data=$adminModel->select_product();
 							foreach ($data as $key => $value) {$count=$value['id']+1;}
 						include('views/admin/mathang/danhsach.php');	//show-product
 						break;
@@ -617,22 +617,7 @@ $sotin1trang = 12;
 					
 						case 'show-all-product':
 							$data=$adminModel->select_product();
-							foreach ($data as $key => $value) {
-								$i = $key+1;
-								echo " <tr>
-                                <td>".$i."</td>
-                                <td>".$value['id']."</td>
-                                <td>$value[name]</td>
-                                <td><img src='$value[image_link]' height='100px' ></td>
-                                <td>".number_format($value['price'])."</td>
-                                <td>$value[discount]</td>
-                                <td  id='shorten' style='max-width: 500px;''><p class='hidden-char'>".htmlentities($value['describes'])."</p></td>
-                                <td>$value[name_catalog]</td>
-                                <td>$value[created]</td>
-                                <td><button data='$value[id]'  class='btn btn-danger btn_delete'>Xoá</button></td>
-                                <td><button data='$value[id]'  class='btn btn-success btn_update'>Sửa</button></td>
-                            </tr>";
-							}
+							
 						case 'add-product':
 							$name = $_POST['name'];
 							$catalog_id = isset($_POST['catalog_id'])?$_POST['catalog_id']:'null';

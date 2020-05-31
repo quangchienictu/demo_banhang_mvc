@@ -1,4 +1,4 @@
- load_product();
+
 add_product_ajax();
 
  function show(id){
@@ -17,7 +17,7 @@ add_product_ajax();
 
  });
 
- function load_product(){
+/* function load_product(){
  	$.ajax({
  		url : "?controller=admin-ajax&action=show-all-product",
  		method:"get",
@@ -26,7 +26,7 @@ add_product_ajax();
  	}).done(function(data){
  		$("#show_product").html(data);
  	});
- }
+ }*/
  function  add_product() {
  	$("#mathang").modal('show');
  	
